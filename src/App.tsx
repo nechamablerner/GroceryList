@@ -1,0 +1,47 @@
+
+import './App.css'
+import { useState } from "react";
+import { GroceryForm } from './GroceryForms';
+import { GroceryList } from './GroceryList';
+
+
+export interface GroceryItemType{
+    id: string;
+    itemName: string;
+    bought: boolean;
+}
+
+function App() {
+  const [items, setItems] = useState<GroceryItemType[]>([]);  
+ 
+  const handleAddItem = (name:string)=>{
+    const newItem: GroceryItemType= {
+      id: Math.random().toString(),
+      
+      itemName: name,
+      bought:false,
+    };
+    setItems((prev) => [...prev, newItem]);
+  }; 
+  
+  const toggleItem = (id: string) =>{
+    setItems(prevItems =>
+      prevItems.map(item =>
+        item.id === id
+        ?{...item, bought: !item.bought}
+        : item
+      ));
+  };
+
+  return (
+    <>
+    <h1>Grocery App</h1>
+    <GroceryForm onAdd={handleAddItem}/>
+    <GroceryList items={items} onToggle={toggleItem}/>
+
+    {items.length === 0 && <p> No items added yet</p>}
+    </>
+  );
+}
+
+export default App
