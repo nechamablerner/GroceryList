@@ -1,10 +1,11 @@
 
 import './App.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GroceryForm } from './GroceryForms';
 import { GroceryList } from './GroceryList';
 import { Header } from './Header';
 import { Footer } from './Footer';
+
 
 
 export interface GroceryItemType{
@@ -13,9 +14,34 @@ export interface GroceryItemType{
     bought: boolean;
 }
 
+function useLocalStorage<T>(key: string, initialValue: T) {
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(error);
+      return initialValue;
+    }
+  });
+useEffect(() => {
+  try {
+      window.localStorage.setItem(key, JSON.stringify(storedValue));
+    } catch (error) {
+      console.error(error);
+    }
+  }, [key, storedValue]);
+
+  return [storedValue, setStoredValue] as const;
+}
+
 function App() {
-  const [items, setItems] = useState<GroceryItemType[]>([]);  
- 
+  const [items, setItems] = useLocalStorage<GroceryItemType[]>(
+    "grocery-items", 
+    []
+  );
+  //  const [items, setItems] = useState<GroceryItemType[]>([]);  
+
   const handleAddItem = (name:string)=>{
     const newItem: GroceryItemType= {
       id: Math.random().toString(),
@@ -37,6 +63,8 @@ function App() {
   const deleteItem =(id: string) =>{
     setItems(prevItems => prevItems.filter(item => item.id !== id));
   };
+
+
 
   return (
     <>
