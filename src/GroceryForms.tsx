@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styles from './form.module.css'
 
 type GroceryFormProps = {
     onAdd: (item: string) => void
@@ -22,9 +23,10 @@ export function GroceryForm({onAdd}: GroceryFormProps){
         <form onSubmit={handleSubmit}>
             <label>
                 Enter item to add to list: 
-                <input value = {inputValue} onChange={handleChange}/>
+                <input className={styles.itemInput}
+                value = {inputValue} onChange={handleChange}/>
             </label>
-            <button type="submit">Submit</button>
+            <button type="submit" className={styles.submitButton}>Add Item</button>
             
         </form>
         

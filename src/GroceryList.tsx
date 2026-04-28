@@ -1,5 +1,6 @@
 import { GroceryItem } from "./GroceryItem";
 import type  {GroceryItemType  } from "./App";
+import styles from './List.module.css'
 
 type GroceryItemProps ={
     items: GroceryItemType[];
@@ -10,7 +11,7 @@ type GroceryItemProps ={
 export function GroceryList({items, onToggle, onDelete}: GroceryItemProps ){    
     return(
         <main> 
-            <h4> Grocery List</h4>
+            <h4 className={styles.listContatiner}> My Grocery List</h4>
             {items.map((item) =>(
                 <GroceryItem key = {item.id} item={item} 
                 onToggle={onToggle}

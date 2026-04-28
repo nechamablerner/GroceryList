@@ -1,0 +1,13 @@
+.itemInput{
+    padding:8px;
+    margin-left: 8px;
+
+}
+.submitButton{
+    margin-left: 10px;
+    background-color: #095421;
+    color: #ffffff;
+}
+.submitButton:active{
+     transform: scale(0.95);
+}

@@ -3,6 +3,8 @@ import './App.css'
 import { useState } from "react";
 import { GroceryForm } from './GroceryForms';
 import { GroceryList } from './GroceryList';
+import { Header } from './Header';
+import { Footer } from './Footer';
 
 
 export interface GroceryItemType{
@@ -17,7 +19,6 @@ function App() {
   const handleAddItem = (name:string)=>{
     const newItem: GroceryItemType= {
       id: Math.random().toString(),
-      
       itemName: name,
       bought:false,
     };
@@ -39,14 +40,14 @@ function App() {
 
   return (
     <>
-    <h1>Grocery App</h1>
+    <Header/>
     <GroceryForm onAdd={handleAddItem}/>
     <GroceryList items={items} 
       onToggle={toggleItem}
       onDelete={deleteItem}
     />
-
     {items.length === 0 && <p> No items added yet</p>}
+    <Footer/>
     </>
   );
 }

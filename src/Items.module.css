@@ -1,0 +1,19 @@
+
+
+ .itemCard{
+    border-style:solid;
+    border-color: #095421;
+     border-radius: 8px;
+    padding:15px;
+    margin: 10px;
+    gap: 20px;
+    width:400px;
+    height: 145px; 
+    margin: 10px auto;
+  
+} 
+
+.itemTitle{
+    font-size:20px;
+    color:#095421;
+}
