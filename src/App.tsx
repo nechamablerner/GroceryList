@@ -33,11 +33,18 @@ function App() {
       ));
   };
 
+  const deleteItem =(id: string) =>{
+    setItems(prevItems => prevItems.filter(item => item.id !== id));
+  };
+
   return (
     <>
     <h1>Grocery App</h1>
     <GroceryForm onAdd={handleAddItem}/>
-    <GroceryList items={items} onToggle={toggleItem}/>
+    <GroceryList items={items} 
+      onToggle={toggleItem}
+      onDelete={deleteItem}
+    />
 
     {items.length === 0 && <p> No items added yet</p>}
     </>
